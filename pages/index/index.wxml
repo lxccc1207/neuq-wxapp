@@ -1,0 +1,101 @@
+<!--index.wxml-->
+<view class="container">
+    <view>
+        <swiper class="swiper_box" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
+                autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
+                 <block wx:for="{{images}}">
+               <swiper-item>
+                    <image src="{{item.p1}}" class="slide-image"/>
+               </swiper-item>    
+               
+            </block>    
+        </swiper>        
+    </view>
+
+
+ <view class="selected">
+        <view class="select-title"><text>精选主题</text></view>
+        <view class="select-top">
+            <view class="select-top-small">
+                <navigator url="">
+                    <image src="/images/s1.png"></image>
+                </navigator>
+            </view>
+            <view class="select-top-small">
+                <navigator url="">
+                    <image src="/images/s2.png"></image>
+                </navigator>
+            </view>
+        </view>
+        <view class="select-bottom">
+            <navigator url="">
+                <image src="/images/psb2.jpg"></image>
+            </navigator>
+        </view>
+ </view>
+
+
+     <view class="newest">
+        <view class="newest-title"><text>最近新品</text></view>
+        <view class="newest-box">
+            <view class="newest-list">
+                <navigator url="">
+                    <image src="/images/a.png"></image>
+                    <view class="newest-text"><text>咖啡</text></view>
+                    <view class="newest-text"><text>￥ 0.01</text></view>
+                </navigator>
+            </view>
+            <view class="newest-list">
+                <navigator url="">
+                    <image src="/images/b.jpg"></image>
+                    <view class="newest-text"><text>咖啡</text></view>
+                    <view class="newest-text"><text>￥ 0.02</text></view>
+                </navigator>
+            </view>
+            <view class="newest-list">
+                <navigator url="">
+                    <image src="/images/c.jpg"></image>
+                    <view class="newest-text"><text>咖啡</text></view>
+                    <view class="newest-text"><text>￥ 0.03</text></view>
+                </navigator>
+            </view>
+            <view class="newest-list">
+                <navigator url="">
+                    <image src="/images/d.png"></image>
+                    <view class="newest-text"><text>咖啡</text></view>
+                    <view class="newest-text"><text>￥ 0.01</text></view>
+                </navigator>
+            </view>
+            <view class="newest-list">
+                <navigator url="">
+                    <image src="/images/e.png"></image>
+                    <view class="newest-text"><text>咖啡</text></view>
+                    <view class="newest-text"><text>￥ 0.02</text></view>
+                </navigator>
+            </view>
+            <view class="newest-list">
+                <navigator url="">
+                    <image src="/images/f.png"></image>
+                    <view class="newest-text"><text>咖啡</text></view>
+                    <view class="newest-text"><text>￥ 0.03</text></view>
+                </navigator>
+            </view>
+            <view class="newest-list">
+                <navigator url="">
+                    <image src="/images/g.jpg"></image>
+                    <view class="newest-text"><text>咖啡</text></view>
+                    <view class="newest-text"><text>￥ 0.01</text></view>
+                </navigator>
+            </view>
+            <view class="newest-list">
+                <navigator url="">
+                    <image src="/images/h.png"></image>
+                    <view class="newest-text"><text>咖啡</text></view>
+                    <view class="newest-text"><text>￥ 0.02</text></view>
+                </navigator>
+            </view>
+           
+        </view>
+    
+</view>
+ </view>
