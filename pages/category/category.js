@@ -1,17 +1,17 @@
 Page({
     data: {
         category: [
-            {name:'果味',id:'guowei'},
-            {name:'蔬菜',id:'shucai'},
-            {name:'炒货',id:'chaohuo'},
-            {name:'点心',id:'dianxin'},
-            {name:'粗茶',id:'cucha'},
-            {name:'淡饭',id:'danfan'}
+            {name:'咖啡',id:'cafe'},
+            {name:'奶茶',id:'naicha'},
+            {name:'酸奶',id:'suannai'},
+            {name:'气泡水',id:'qipaoshui'},
+            {name:'奶昔',id:'naixi'},
+            {name:'特别推荐',id:'tebietuijian'}
         ],
         detail:[],
         curIndex: 0,
         isScroll: false,
-        toView: 'guowei'
+        toView: 'cafe'
     },
     onReady(){
         var self = this;

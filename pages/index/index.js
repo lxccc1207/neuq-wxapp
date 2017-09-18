@@ -3,6 +3,7 @@
 var app = getApp()
 Page({
   data: {
+    useInfo:{},
     indicatorDots: true,
     vertical: false,
     autoplay: true,
@@ -13,6 +14,26 @@ Page({
              {p1:'../../images/psb.png',},
              {p1:'../../images/psb1.jpg',},
             ],
+    navs: [
+      {
+        "name": "咖啡",
+        "url": ''
+      },
+      {
+        "name": "奶茶",
+        "url": ''
+      },
+      {
+        "name": "酸奶",
+        "url": ''
+      },
+      {
+        "name": "气泡水",
+        "url": ''
+      },
+
+
+    ]
 
   },
 
@@ -30,7 +51,7 @@ Page({
         userInfo: userInfo
       })
     })
-
+  
     //sliderList
     wx.request({
       url: '',

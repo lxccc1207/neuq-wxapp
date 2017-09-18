@@ -5,7 +5,7 @@ page,.main{
 }
 .categroy-left{
     float: left;
-    width: 150rpx;
+    width: 170rpx;
     height: 100%;
     border-right: 1px solid #ddd;
     box-sizing: border-box;
@@ -17,8 +17,8 @@ page,.main{
     border-left: 3px solid #fff;
 }
 .categroy-left .cate-list.on{
-    color: #AB956D;
-    border-color: #AB956D;
+    color: black;
+    border-color: black;
 }
 .categroy-right{
     float: right;

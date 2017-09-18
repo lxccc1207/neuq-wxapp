@@ -63,7 +63,6 @@
   right: 15px;
   width: 15px;
   height: 15px;
-  background-image: url(../../images/icon-arrowdown.png);
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }

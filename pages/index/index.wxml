@@ -3,7 +3,7 @@
     <view>
         <swiper class="swiper_box" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
                 autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
-                 <block wx:for="{{images}}">
+             <block wx:for="{{images}}">
                <swiper-item>
                     <image src="{{item.p1}}" class="slide-image"/>
                </swiper-item>    
@@ -12,6 +12,14 @@
         </swiper>        
     </view>
 
+  <view class="index-nav">
+    <block wx:for="{{navs}}">
+      <view class="nav-item">
+        <image src="{{item.icon}}" class="nav-icon" mode="widthFix"/>
+        <text>{{item.name}}</text>
+      </view>
+    </block>
+  </view>
 
  <view class="selected">
         <view class="select-title"><text>精选主题</text></view>
@@ -39,56 +47,56 @@
         <view class="newest-title"><text>最近新品</text></view>
         <view class="newest-box">
             <view class="newest-list">
-                <navigator url="">
+                <navigator url="/pages/goods-details/index">
                     <image src="/images/a.png"></image>
                     <view class="newest-text"><text>咖啡</text></view>
                     <view class="newest-text"><text>￥ 0.01</text></view>
                 </navigator>
             </view>
             <view class="newest-list">
-                <navigator url="">
+                <navigator url="/pages/goods-details/index">
                     <image src="/images/b.jpg"></image>
                     <view class="newest-text"><text>咖啡</text></view>
                     <view class="newest-text"><text>￥ 0.02</text></view>
                 </navigator>
             </view>
             <view class="newest-list">
-                <navigator url="">
+                <navigator url="/pages/goods-details/index">
                     <image src="/images/c.jpg"></image>
                     <view class="newest-text"><text>咖啡</text></view>
                     <view class="newest-text"><text>￥ 0.03</text></view>
                 </navigator>
             </view>
             <view class="newest-list">
-                <navigator url="">
+                <navigator url="/pages/goods-details/index">
                     <image src="/images/d.png"></image>
                     <view class="newest-text"><text>咖啡</text></view>
                     <view class="newest-text"><text>￥ 0.01</text></view>
                 </navigator>
             </view>
             <view class="newest-list">
-                <navigator url="">
+                <navigator url="/pages/goods-details/index">
                     <image src="/images/e.png"></image>
                     <view class="newest-text"><text>咖啡</text></view>
                     <view class="newest-text"><text>￥ 0.02</text></view>
                 </navigator>
             </view>
             <view class="newest-list">
-                <navigator url="">
+                <navigator url="/pages/goods-details/index">
                     <image src="/images/f.png"></image>
                     <view class="newest-text"><text>咖啡</text></view>
                     <view class="newest-text"><text>￥ 0.03</text></view>
                 </navigator>
             </view>
             <view class="newest-list">
-                <navigator url="">
+                <navigator url="/pages/goods-details/index">
                     <image src="/images/g.jpg"></image>
                     <view class="newest-text"><text>咖啡</text></view>
                     <view class="newest-text"><text>￥ 0.01</text></view>
                 </navigator>
             </view>
             <view class="newest-list">
-                <navigator url="">
+                <navigator url="/pages/goods-details/index">
                     <image src="/images/h.png"></image>
                     <view class="newest-text"><text>咖啡</text></view>
                     <view class="newest-text"><text>￥ 0.02</text></view>
