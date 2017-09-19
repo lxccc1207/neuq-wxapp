@@ -43,8 +43,9 @@
           </view>
         </view>
     </view>
-    <view class="footer-box">        
-      
+
+    
+    <view class="footer-box">           
         <view class="shop-cart-btn" bindtap="goShopCar">
             <view class="shop-num">({{shopNum}})</view>
             购物车

@@ -57,12 +57,3 @@
   text-align: center;
   font-size: 8px;
 }
-.with_arrow{
-  position: absolute;
-  top: 18px;
-  right: 15px;
-  width: 15px;
-  height: 15px;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}

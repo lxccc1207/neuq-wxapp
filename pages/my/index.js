@@ -7,12 +7,12 @@ Page( {
       icon: '',
       text: '我的订单',
       isunread: true,
-      unreadNum: 2
+      
     }, {
         icon: '',
         text: '我的代金券',
         isunread: false,
-        unreadNum: 2
+       
       }, 
        {
         icon: '',

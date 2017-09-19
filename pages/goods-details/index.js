@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 var app = getApp();
-//var WxParse = require('../../wxParse/wxParse.js');
+
 
 Page({
   data: {
@@ -15,9 +15,9 @@ Page({
     selectSizePrice:0,
     shopNum:0,
     hideShopPopup:true,
-    buyNumber:0,
+    buyNumber:1,
     buyNumMin:1,
-    buyNumMax:0,
+    buyNumMax:100,
 
     propertyChildIds:"",
     propertyChildNames:"",
@@ -46,7 +46,7 @@ Page({
       } 
     })
     wx.request({
-      url: '/'+ app.globalData.subDomain +'',
+      url: '',
       data: {
         id: e.id
       },
@@ -121,6 +121,7 @@ Page({
         hideShopPopup: true 
     })  
   },
+  //减号
   numJianTap: function() {
      if(this.data.buyNumber > this.data.buyNumMin){
         var currentNum = this.data.buyNumber;
@@ -130,6 +131,7 @@ Page({
         })  
      }
   },
+  //加号
   numJiaTap: function() {
      if(this.data.buyNumber < this.data.buyNumMax){
         var currentNum = this.data.buyNumber;
@@ -145,13 +147,6 @@ Page({
    */
   labelItemTap: function(e) {
     var that = this;
-    /*
-    console.log(e)
-    console.log(e.currentTarget.dataset.propertyid)
-    console.log(e.currentTarget.dataset.propertyname)
-    console.log(e.currentTarget.dataset.propertychildid)
-    console.log(e.currentTarget.dataset.propertychildname)
-    */
     // 取消该分类下的子栏目所有的选中状态
     var childs = that.data.goodsDetail.properties[e.currentTarget.dataset.propertyindex].childsCurGoods;
     for(var i = 0;i < childs.length;i++){
@@ -246,8 +241,7 @@ Page({
       icon: 'success',
       duration: 2000
     })
-    //console.log(shopCarInfo);
-
+    
     //shopCarInfo = {shopNum:12,shopList:[]}
   },
 	/**
@@ -286,9 +280,9 @@ Page({
       data:buyNowInfo
     })
     this.closePopupTap();
-
+   //跳到支付页
     wx.navigateTo({
-      url: "/pages/to-pay-order/index?orderType=buyNow"
+      url: ""
     })    
   },
   /**
