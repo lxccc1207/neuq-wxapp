@@ -4,25 +4,24 @@
     "pages/cart/index",
     "pages/category/category",
     "pages/my/index",
-    "pages/goods-details/index"
+    "pages/goods-details/index",
+    "pages/order-list/index"
   ],
   "window":{
-    "backgroundTextStyle":"light",
+    "backgroundTextStyle":"dark",
     "navigationBarTitleText": "咖啡店",
-    "navigationBarTextStyle":"white",
-    "navigationBarBackgroundColor": "#292929",
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#fff",
     "backgroundColor": "#F2f2f2",
     "enablePullDownRefresh": true
   },
   "tabBar": {
-    "color": "white",
-    "selectedColor": "#f9f027",
-    "borderStyle": "white",
-    "backgroundColor": "#292929",
+    "color": "#333",
+    "selectedColor": "#ff0000",
+    "backgroundColor": "#fff",
     "list": [
       {
         "pagePath": "pages/index/index",
-       
         "text": "首页"
       },
       {
@@ -31,7 +30,7 @@
       },
      {
        "pagePath":"pages/cart/index",
-        "text":"购物车"     
+        "text":"购物车"
      },
      {
         "pagePath": "pages/my/index",

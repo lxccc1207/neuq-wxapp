@@ -5,14 +5,23 @@
     <text class="userinfo-nickname">{{userInfo.nickName}}</text>
   </view>
   <view class="info_list">
-    <block wx:for="{{userListInfo}}">
+    <view class="weui_cell">
+        <navigator hover-class="none" url="/pages/order-list/index" style="width: 100%;">
+          <view class="weui_cell_bd">
+              <view class="weui_cell_bd_p">我的订单</view>
+          </view>
+        </navigator>
+    </view>
+    <block wx:for="{{userListInfo}}" wx:key="{{item.text}}">
         <view class="weui_cell">
-            <view class="weui_cell_hd"><image src="{{item.icon}}"></image></view>
-            <view class="weui_cell_bd">
-                <view class="weui_cell_bd_p"> {{item.text}} </view>
-            </view>
-            <view wx:if="{{item.isunread}}" class="badge">{{item.unreadNum}}</view>
-            <view class="with_arrow"></view>
+            <!-- <view class="weui_cell_hd"><image src="{{item.icon}}"></image></view> -->
+            <navigator hover-class="none" url="{{item.url}}" style="width: 100%;">
+              <view class="weui_cell_bd">
+                  <view class="weui_cell_bd_p"> {{item.text}} </view>
+              </view>
+              <view wx:if="{{item.isunread}}" class="badge">{{item.unreadNum}}</view>
+            </navigator>
+            <!-- <view class="with_arrow"></view> -->
         </view>
     </block>
   </view>
