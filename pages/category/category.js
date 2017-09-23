@@ -15,15 +15,15 @@ Page({
     },
     onReady(){
         var self = this;
-        wx.request({
-            url:'',
-            success(res){
-                console.log(res.data)
-                self.setData({
-                    detail : res.data.result
-                })
-            }
-        });
+        // wx.request({
+        //     url:'',
+        //     success(res){
+        //         console.log(res.data)
+        //         self.setData({
+        //             detail : res.data.result
+        //         })
+        //     }
+        // });
         
     },
     switchTab(e){

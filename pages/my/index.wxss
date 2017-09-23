@@ -1,13 +1,13 @@
 /**index.wxss**/
 .container {
-  background-color: #F2f2f2;
+  background-color: #fff;
 }
 .userinfo {
   display: flex;
   flex-direction: column;
   padding: 50rpx 0;
   align-items: center;
-  background: #f9f027;
+  background: url('http://image.huashantech.cn/coffe/psb2.jpg');
 }
 .userinfo-avatar {
   width: 128rpx;
@@ -16,7 +16,7 @@
   border-radius: 50%;
 }
 .userinfo-nickname {
-  color: #333;
+  color: #fff;
 }
 .weui_cell{
     position: relative;

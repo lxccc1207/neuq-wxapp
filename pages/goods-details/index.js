@@ -1,7 +1,12 @@
 //index.js
 //获取应用实例
 var app = getApp();
+<<<<<<< HEAD
 
+=======
+const api = require('../../api/index.js')
+//var WxParse = require('../../wxParse/wxParse.js');
+>>>>>>> master
 
 Page({
   data: {
@@ -9,7 +14,7 @@ Page({
     interval: 3000,
     duration: 1000,
     goodsDetail:{},
-    swiperCurrent: 0,  
+    swiperCurrent: 0,
     hasMoreSelect:false,
     selectSize:"选择：",
     selectSizePrice:0,
@@ -17,8 +22,12 @@ Page({
     hideShopPopup:true,
     buyNumber:1,
     buyNumMin:1,
+<<<<<<< HEAD
     buyNumMax:100,
 
+=======
+    buyNumMax:0,
+>>>>>>> master
     propertyChildIds:"",
     propertyChildNames:"",
     canSubmit:false, //  选中规格尺寸时候是否允许加入购物车
@@ -29,12 +38,14 @@ Page({
   //事件处理函数
   swiperchange: function(e) {
       //console.log(e.detail.current)
-       this.setData({  
-        swiperCurrent: e.detail.current  
-    })  
+       this.setData({
+        swiperCurrent: e.detail.current
+    })
   },
   onLoad: function (e) {
+    // console.log(e)
     var that = this;
+<<<<<<< HEAD
     // 获取购物车数据
     wx.getStorage({
       key: 'shopCarInfo',
@@ -70,14 +81,75 @@ Page({
           buyNumber:(res.data.data.basicInfo.stores>0) ? 1: 0
         });
        
+=======
+    api.getCommodity(e.id).then(res => {
+      console.log(res)
+      if (res.data.status === 0) {
+        this.setData({
+          goodsDetail: res.data.res
+        })
+      } else if (res.data.status === 1001) {
+        app.getSessionId().then(result => {
+          api.getCommodity(e.id).then(res => {
+            if (res.data.status === 0) {
+              this.setData({
+                goodsDetail: res.data.res
+              })
+            }
+          })
+        })
+      } else {
+        wx.showToast({
+          title: res.data.msg,
+          image: '../../images/icon/error.png',
+          duration: 2000
+        })
+>>>>>>> master
       }
     })
+    // 获取购物车数据
+    // wx.getStorage({
+    //   key: 'shopCarInfo',
+    //   success: function(res) {
+    //     that.setData({
+    //       shopCarInfo:res.data,
+    //       shopNum:res.data.shopNum
+    //     });
+    //   }
+    // })
+    // wx.request({
+    //   url: '/'+ app.globalData.subDomain +'',
+    //   data: {
+    //     id: e.id
+    //   },
+    //   success: function(res) {
+    //     var selectSizeTemp = "";
+    //     if (res.data.data.properties) {
+    //       for(var i=0;i<res.data.data.properties.length;i++){
+    //         selectSizeTemp = selectSizeTemp + " " + res.data.data.properties[i].name;
+    //       }
+    //       that.setData({
+    //         hasMoreSelect:true,
+    //         selectSize:that.data.selectSize + selectSizeTemp,
+    //         selectSizePrice:res.data.data.basicInfo.minPrice,
+    //       });
+    //     }
+    //     that.data.goodsDetail = res.data.data;
+    //     that.setData({
+    //       goodsDetail:res.data.data,
+    //       selectSizePrice:res.data.data.basicInfo.minPrice,
+    //       buyNumMax:res.data.data.basicInfo.stores,
+    //       buyNumber:(res.data.data.basicInfo.stores>0) ? 1: 0
+    //     });
+
+    //   }
+    // })
     this.reputation(e.id);
   },
   goShopCar: function () {
-    wx.reLaunch({
-      url: ""
-    });
+    // wx.reLaunch({
+    //   url: ""
+    // });
   },
   toAddShopCar: function () {
     this.setData({
@@ -104,31 +176,31 @@ Page({
         }
         this.addShopCar();
         this.goShopCar();*/
-  },  
+  },
   /**
    * 规格选择弹出框
    */
   bindGuiGeTap: function() {
-     this.setData({  
-        hideShopPopup: false 
-    })  
+     this.setData({
+        hideShopPopup: false
+    })
   },
   /**
    * 规格选择弹出框隐藏
    */
   closePopupTap: function() {
-     this.setData({  
-        hideShopPopup: true 
-    })  
+     this.setData({
+        hideShopPopup: true
+    })
   },
   //减号
   numJianTap: function() {
      if(this.data.buyNumber > this.data.buyNumMin){
         var currentNum = this.data.buyNumber;
-        currentNum--; 
-        this.setData({  
+        currentNum--;
+        this.setData({
             buyNumber: currentNum
-        })  
+        })
      }
   },
   //加号
@@ -136,9 +208,9 @@ Page({
      if(this.data.buyNumber < this.data.buyNumMax){
         var currentNum = this.data.buyNumber;
         currentNum++ ;
-        this.setData({  
+        this.setData({
             buyNumber: currentNum
-        })  
+        })
      }
   },
   /**
@@ -175,29 +247,29 @@ Page({
     }
     // 计算当前价格
     if (canSubmit) {
-      wx.request({
-        url: ''+ app.globalData.subDomain +'',
-        data: {
-          goodsId: that.data.goodsDetail.basicInfo.id,
-          propertyChildIds:propertyChildIds
-        },
-        success: function(res) {
-          that.setData({
-            selectSizePrice:res.data.data.price,
-            propertyChildIds:propertyChildIds,
-            propertyChildNames:propertyChildNames,
-            buyNumMax:res.data.data.stores,
-            buyNumber:(res.data.data.stores>0) ? 1: 0
-          });
-        }
-      })
+      // wx.request({
+      //   url: ''+ app.globalData.subDomain +'',
+      //   data: {
+      //     goodsId: that.data.goodsDetail.basicInfo.id,
+      //     propertyChildIds:propertyChildIds
+      //   },
+      //   success: function(res) {
+      //     that.setData({
+      //       selectSizePrice:res.data.data.price,
+      //       propertyChildIds:propertyChildIds,
+      //       propertyChildNames:propertyChildNames,
+      //       buyNumMax:res.data.data.stores,
+      //       buyNumber:(res.data.data.stores>0) ? 1: 0
+      //     });
+      //   }
+      // })
     }
 
-    
+
     this.setData({
       goodsDetail: that.data.goodsDetail,
       canSubmit:canSubmit
-    })  
+    })
   },
   /**
   * 加入购物车
@@ -209,7 +281,7 @@ Page({
           title: '提示',
           content: '请选择商品规格！',
           showCancel: false
-        })       
+        })
       }
       this.bindGuiGeTap();
       return;
@@ -263,7 +335,7 @@ Page({
         showCancel:false
       })
       return;
-    }    
+    }
     if(this.data.buyNumber < 1){
       wx.showModal({
         title: '提示',
@@ -282,8 +354,13 @@ Page({
     this.closePopupTap();
    //跳到支付页
     wx.navigateTo({
+<<<<<<< HEAD
       url: ""
     })    
+=======
+      url: "/pages/to-pay-order/index?orderType=buyNow"
+    })
+>>>>>>> master
   },
   /**
    * 组建购物车信息
@@ -294,7 +371,7 @@ Page({
     shopCarMap.goodsId = this.data.goodsDetail.basicInfo.id;
     shopCarMap.pic = this.data.goodsDetail.basicInfo.pic;
     shopCarMap.name = this.data.goodsDetail.basicInfo.name;
-    // shopCarMap.label=this.data.goodsDetail.basicInfo.id; 规格尺寸 
+    // shopCarMap.label=this.data.goodsDetail.basicInfo.id; 规格尺寸
     shopCarMap.propertyChildIds = this.data.propertyChildIds;
     shopCarMap.label = this.data.propertyChildNames;
     shopCarMap.price = this.data.selectSizePrice;
@@ -338,7 +415,7 @@ Page({
     shopCarMap.goodsId = this.data.goodsDetail.basicInfo.id;
     shopCarMap.pic = this.data.goodsDetail.basicInfo.pic;
     shopCarMap.name = this.data.goodsDetail.basicInfo.name;
-    // shopCarMap.label=this.data.goodsDetail.basicInfo.id; 规格尺寸 
+    // shopCarMap.label=this.data.goodsDetail.basicInfo.id; 规格尺寸
     shopCarMap.propertyChildIds = this.data.propertyChildIds;
     shopCarMap.label = this.data.propertyChildNames;
     shopCarMap.price = this.data.selectSizePrice;
@@ -374,23 +451,23 @@ Page({
 
     buyNowInfo.shopList.push(shopCarMap);
     return buyNowInfo;
-  },   
- 
+  },
+
   reputation: function (goodsId) {
     var that = this;
-    wx.request({
-      url: '' + app.globalData.subDomain + '',
-      data: {
-        goodsId: goodsId
-      },
-      success: function (res) {
-        if (res.data.code == 0) {
-          console.log(res.data.data);
-          that.setData({
-            reputation: res.data.data
-          });
-        }
-      }
-    })
+    // wx.request({
+    //   url: '' + app.globalData.subDomain + '',
+    //   data: {
+    //     goodsId: goodsId
+    //   },
+    //   success: function (res) {
+    //     if (res.data.code == 0) {
+    //       console.log(res.data.data);
+    //       that.setData({
+    //         reputation: res.data.data
+    //       });
+    //     }
+    //   }
+    // })
   }
 })
