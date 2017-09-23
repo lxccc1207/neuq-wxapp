@@ -1,4 +1,4 @@
-
+/*index.wxss*/
 .container {
   background-color: #F2f2f2;
   min-height: 100%;
@@ -206,20 +206,24 @@ swiper-item image {
   width: 120rpx;
   height: 120rpx;
 }
-.pop-goods-title{
+/*.pop-goods-title{
   width: 484rpx;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   font-size:26rpx;
   color:#000000;
-}
+}*/
 .pop-goods-quantity{
   font-size:26rpx;
   color:#000000;
 }
+.pop-goods-attr{
+  font-size:26rpx;
+  color:#000000;
+}
 .pop-goods-price{
-  font-size:40rpx;
+  font-size:50rpx;
   color:#e64340;
 }
 .pop-goods-close{
@@ -295,6 +299,6 @@ swiper-item image {
   color:#ffffff;
   background-color: #e64340;
 }
-.buy-num-box .num-box .hui{
+.buy-num-box .num-box .can{
   background-color: #f5f5f9;
 }

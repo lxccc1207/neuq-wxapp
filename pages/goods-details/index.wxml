@@ -53,11 +53,11 @@
     </view>
     <view class="footer-box">
 
-        <view class="shop-cart-btn" bindtap="goShopCar">
+        <view class="shop-cart-btn" bindtap="goShopCart">
             <view class="shop-num">({{shopNum}})</view>
             购物车
         </view>
-        <view class="join-shop-cart" bindtap="toAddShopCar">加入购物车</view>
+        <view class="join-shop-cart" bindtap="toAddShopCart">加入购物车</view>
         <view class="now-buy" bindtap="tobuy">立即购买</view>
    </view>
     <view class="show-popup" hidden="{{hideShopPopup}}" >
@@ -68,19 +68,20 @@
                     <image src="{{goodsDetail.imageList[0].url}}" class="goods-thumbnail"/>
                 </view>
                 <view class="pop-goods-des">
-                    <view class="pop-goods-title">{{goodsDetail.name}}</view>
+                    <!-- <view class="pop-goods-title">{{goodsDetail.name}}</view> -->
+                    <view class="pop-goods-price">¥ {{price}}</view>
                     <view class="pop-goods-quantity">库存：{{goodsDetail.quantity}}</view>
-                    <view class="pop-goods-price">¥ {{goodsDetail.price}}</view>
+                    <view class="pop-goods-attr">已选：</view>
                 </view>
                 <view class="pop-goods-close" bindtap="closePopupTap"></view>
              </view>
              <view class="size-label-box">
-                <block wx:for="{{goodsDetail.commodityPOList}}" wx:for-item="property" wx:for-index="idx" wx:key="id">
+                <block wx:for="{{goodsDetail.commodityPOList}}" wx:for-item="property" wx:for-index="idx" wx:key="{{property.id}}">
                 <view class="label">{{property.attrName}}</view>
                 <view class="label-item-box">
-                    <view class="label-item" wx:for="{{property.commodityAttrPOList}}" wx:key="property.attrName" wx:for-item="propertyChild"
-                    bindtap="labelItemTap" data-id="{{propertyChild.id}}" data-price="{{propertyChild.addPrice}}">
-                        {{propertyChild.value}}
+                    <view class="label-item {{shopPOListActive[0][property.attrName] === propertyChild.id ? 'active' : '' }}" wx:for="{{property.commodityAttrPOList}}" wx:key="property.attrName" wx:for-item="propertyChild"
+                    bindtap="labelItemTap" data-id="{{propertyChild.id}}" data-addPrice="{{propertyChild.addPrice}}" data-attrName="{{propertyChild.typeName}}" data-value="{{propertyChild.value}}">
+                      {{propertyChild.value}}
                     </view>
                 </view>
                 </block>
@@ -88,14 +89,14 @@
              <view class="buy-num-box">
                 <view class="num-label">购买数量</view>
                 <view class="num-box">
-                    <view class="num-subtract {{buyNumber == buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>
+                    <view class="num-subtract {{buyNumber == buyNumMin ? 'can': ''}}" bindtap="numSubtractTap">-</view>
                     <view class="num-input">
                        <input  type="number" value="{{buyNumber}}" disabled/>
                     </view>
-                    <view class="num-add {{buyNumber== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap">+</view>
+                    <view class="num-add {{buyNumber== buyNumMax ? 'can': ''}}" bindtap="numAddTap">+</view>
                 </view>
              </view>
-             <view class="popup-join-btn" wx:if="{{shopType =='addShopCar'}}" bindtap="addShopCar">
+             <view class="popup-join-btn" wx:if="{{shopType =='addShopCart'}}" bindtap="addShopCart">
                 加入购物车
              </view>
              <view class="popup-join-btn" wx:if="{{shopType =='tobuy'}}" bindtap="buyNow">

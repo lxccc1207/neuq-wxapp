@@ -16,36 +16,20 @@ Page({
   },
   onPullDownRefresh: () => {
     api.getIndexInfo().then(res => {
-        if (res.data.status === 0) {
-          wx.stopPullDownRefresh()
-          this.setData({
-            sliderList: res.data.res.bannerPOList,
-            classifyList: res.data.res.typeList,
-            goodsList: res.data.res.commodityPOList
+      if (res.data.status === 0) {
+        wx.stopPullDownRefresh()
+        this.setData({
+          sliderList: res.data.res.bannerPOList,
+          classifyList: res.data.res.typeList,
+          goodsList: res.data.res.commodityPOList
+        })
+      } else {
+          wx.showToast({
+            title: res.data.msg,
+            image: '../../images/icon/error.png',
+            duration: 2000
           })
-        } else if (res.data.status === 1001){
-          app.getSessionId().then(res => {
-              console.log(res)
-              api.getIndexInfo().then(res => {
-                  if (res.data.status === 0) {
-                      wx.stopPullDownRefresh()
-                      this.setData({
-                        sliderList: res.data.res.bannerPOList,
-                        classifyList: res.data.res.typeList,
-                        goodsList: res.data.res.commodityPOList
-                      })
-                  } else {
-
-                  }
-              })
-          })
-        } else {
-            wx.showToast({
-              title: res.data.msg,
-              image: '../../images/icon/error.png',
-              duration: 2000
-            })
-        }
+      }
     })
   },
   //事件处理函数
@@ -56,92 +40,22 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    setTimeout(()=>{
-        api.getIndexInfo().then(res => {
-          wx.hideLoading()
-          console.log(res)
-          if (res.data.status === 0) {
-            this.setData({
-              sliderList: res.data.res.bannerPOList,
-              classifyList: res.data.res.typeList,
-              goodsList: res.data.res.commodityPOList
-            })
-          } else {
-            app.getSessionId().then(result => {
-                console.log(result)
-                api.getIndexInfo().then(res => {
-                    if (res.data.status === 0) {
-                        this.setData({
-                          sliderList: res.data.res.bannerPOList,
-                          classifyList: res.data.res.typeList,
-                          goodsList: res.data.res.commodityPOList
-                        })
-                    } else {
-                        wx.showToast({
-                          title: res.data.msg,
-                          image: '../../images/icon/error.png',
-                          duration: 2000
-                        })
-                    }
-                })
-            })
-          }
+    api.getIndexInfo().then(res => {
+      wx.hideLoading()
+      console.log(res)
+      if (res.data.status === 0) {
+        this.setData({
+          sliderList: res.data.res.bannerPOList,
+          classifyList: res.data.res.typeList,
+          goodsList: res.data.res.commodityPOList
         })
-    }, 1000)
-    //sliderList
-    // wx.request({
-    //   url: '',
-    //   method: 'GET',
-    //   data: {},
-    //   header: {
-    //     'Accept': ''
-    //   },
-    //   success: function (res) {
-    //     that.setData({
-    //       images: res.data
-    //     })
-    //   }
-    // })
-
-    //venuesList
-    // wx.request({
-    //   url: '',
-    //   method: 'GET',
-    //   data: {},
-    //   header: {
-    //     'Accept': ''
-    //   },
-    //   success: function (res) {
-    //     that.setData({
-    //       venuesItems: res.data.data
-    //     })
-    //     setTimeout(function () {
-    //       that.setData({
-    //         loadingHidden: true
-    //       })
-    //     }, 1500)
-    //   }
-    // })
-
-    //choiceList
-    // wx.request({
-    //   url: '',
-    //   method: 'GET',
-    //   data: {},
-    //   header: {
-    //     'Accept': ''
-    //   },
-    //   success: function (res) {
-    //     that.setData({
-    //       choiceItems: res.data.data.dataList
-    //     })
-    //     setTimeout(function () {
-    //       that.setData({
-    //         loadingHidden: true
-    //       })
-    //     }, 1500)
-    //   }
-    // })
-
+      } else {
+        wx.showToast({
+          title: '发生错误，请重启请求',
+          image: '../../images/icon/error.png',
+          duration: 2000
+        })
+      }
+    })
   }
 })

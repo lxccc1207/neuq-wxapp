@@ -23,7 +23,7 @@ function decodeUserInfo(data) {
 }
 
 function getIndexInfo () {
-  return pwx.request({
+  return pwx.requestNoToken({
     url: apiConfig.baseUrl + apiConfig.type + apiConfig.version + '/commodity/getIndexInfo',
     method : "GET"
   })
