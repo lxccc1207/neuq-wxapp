@@ -7,16 +7,17 @@
   flex-direction: column;
   padding: 50rpx 0;
   align-items: center;
-  background: url('http://image.huashantech.cn/coffe/psb2.jpg');
+
 }
 .userinfo-avatar {
   width: 128rpx;
   height: 128rpx;
   margin: 20rpx;
   border-radius: 50%;
+  
 }
 .userinfo-nickname {
-  color: #fff;
+  color: dark;
 }
 .weui_cell{
     position: relative;
