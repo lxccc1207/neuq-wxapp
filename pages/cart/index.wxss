@@ -1,12 +1,15 @@
-.container {
-  display: flex;
-  height: 100%;
-  align-items: center;/*垂直居中*/
-  justify-content: center;/*水平居中*/
+/**index.wxss**/
+@import "../template-cart/template-cart.wxss";
+page{
+  min-height: 100%;
   background-color: #F2f2f2;
-  color: #939393;
 }
-.container .cart-image {
-  width: 120px;
-  height: 120px;
+.container {
+  background-color: #F2f2f2;
+  min-height: 100%;
+}
+.pos-fiexd{
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
