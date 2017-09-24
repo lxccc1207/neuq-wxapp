@@ -5,8 +5,7 @@
     "pages/category/category",
     "pages/my/index",
     "pages/goods-details/index",
-    "pages/order-list/index",
-    "pages/template-cart/template-cart"
+    "pages/order-list/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

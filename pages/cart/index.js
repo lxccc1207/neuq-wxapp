@@ -1,12 +1,13 @@
 //index.js
 var app = getApp()
+const api = require('../../api/index.js')
 Page({
   data: {
     goodsList: {
       saveHidden: true,
       totalPrice: 0,
-      allSelect: true,
-      noSelect: false,
+      allSelect: false,
+      noSelect: true,
       list: []
     },
     delBtnWidth: 120,    //删除按钮宽度单位（rpx）
@@ -33,25 +34,76 @@ Page({
     });
   },
   onLoad: function () {
+    api.getShoppingCart().then(res => {
+      console.log(res)
+      if (res.data.status === 0) {
+        this.data.goodsList.list = res.data.res
+        this.setData({
+          goodsList: this.data.goodsList
+        })
+      } else if (res.data.status === 1001) {
+        app.getSessionId().then(result => {
+          api.getShoppingCart(e.id).then(res => {
+            if (res.data.status === 0) {
+              this.setData({
+                goodsList: this.data.goodsList
+              })
+            }
+          })
+        })
+      } else {
+        wx.showToast({
+          title: res.data.msg,
+          image: '../../images/icon/error.png',
+          duration: 2000
+        })
+      }
+    })
     this.initEleWidth();
     this.onShow();
   },
-  onShow: function () {
-    var shopList = [];
-    // 获取购物车数据
-    var shopCarInfoMem = wx.getStorageSync('shopCarInfo');
-    if (shopCarInfoMem && shopCarInfoMem.shopList) {
-      shopList = shopCarInfoMem.shopList
-    }
-    this.data.goodsList.list = shopList;
-    this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), shopList);
+  onPullDownRefresh: function () {
+    api.getShoppingCart().then(res => {
+      wx.stopPullDownRefresh()
+      if (res.data.status === 0) {
+        this.data.goodsList.list = res.data.res
+        this.setData({
+          goodsList: this.data.goodsList
+        })
+      } else if (res.data.status === 1001) {
+        app.getSessionId().then(result => {
+          api.getShoppingCart(e.id).then(res => {
+            if (res.data.status === 0) {
+              this.setData({
+                goodsList: this.data.goodsList
+              })
+            }
+          })
+        })
+      } else {
+        wx.showToast({
+          title: res.data.msg,
+          image: '../../images/icon/error.png',
+          duration: 2000
+        })
+      }
+    })
   },
+  // onShow: function () {
+  //   var shopList = [];
+  //   // 获取购物车数据
+  //   var shopCarInfoMem = wx.getStorageSync('shopCarInfo');
+  //   if (shopCarInfoMem && shopCarInfoMem.shopList) {
+  //     shopList = shopCarInfoMem.shopList
+  //   }
+  //   this.data.goodsList.list = shopList;
+  //   this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), shopList);
+  // },
   toIndexPage: function () {
     wx.switchTab({
       url: "/pages/index/index"
     });
   },
-
   touchS: function (e) {
     if (e.touches.length == 1) {
       this.setData({
@@ -82,7 +134,6 @@ Page({
       }
     }
   },
-
   touchE: function (e) {
     var index = e.currentTarget.dataset.index;
     if (e.changedTouches.length == 1) {
@@ -113,16 +164,21 @@ Page({
       this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
     }
   },
+  jumpDetail: function (e) {
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '../goods-details/index?id=' + id
+    })
+  },
   totalPrice: function () {
     var list = this.data.goodsList.list;
     var total = 0;
     for (var i = 0; i < list.length; i++) {
       var curItem = list[i];
       if (curItem.active) {
-        total += parseFloat(curItem.price) * curItem.number;
+        total += (curItem.commodityPO.price * curItem.number);
       }
     }
-    total = parseFloat(total.toFixed(2));//js浮点计算bug，取两位小数精度
     return total;
   },
   allSelect: function () {
@@ -193,7 +249,7 @@ Page({
 
     this.setGoodsList(this.getSaveHide(), this.totalPrice(), !currentAllSelect, this.noSelect(), list);
   },
-  jiaBtnTap: function (e) {
+  addBtnTap: function (e) {
     var index = e.currentTarget.dataset.index;
     var list = this.data.goodsList.list;
     if (index !== "" && index != null) {
@@ -203,7 +259,7 @@ Page({
       }
     }
   },
-  jianBtnTap: function (e) {
+  subtractBtnTap: function (e) {
     var index = e.currentTarget.dataset.index;
     var list = this.data.goodsList.list;
     if (index !== "" && index != null) {
