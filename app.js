@@ -2,7 +2,9 @@
 const Promise = require('modules/es6-promise.js').Promise
 const api = require('api/index.js')
 const pwx = require('utils/pwx.js')
+import {ToastPannel} from './templates/toast/toast'
 App({
+  ToastPannel,
   onLaunch: function () {
     // this.checkSession()
     this.getSessionId()
