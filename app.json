@@ -5,7 +5,11 @@
     "pages/category/category",
     "pages/my/index",
     "pages/goods-details/index",
-    "pages/order-list/index"
+    "pages/order-list/index",
+    "pages/to-pay-order/index",
+    "pages/address-add/index",
+    "pages/select-address/index"
+
   ],
   "window": {
     "backgroundTextStyle": "light",

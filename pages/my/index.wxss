@@ -10,7 +10,6 @@
   box-sizing: border-box;
   align-items: center;
   border-bottom: 1px solid #dadada;
-
 }
 .userinfo-avatar {
   width: 128rpx;

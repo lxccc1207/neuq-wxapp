@@ -12,11 +12,13 @@ Page( {
     }, {
       icon: '',
       text: '我的代金券',
+      url:'',
       isunread: false,
       unreadNum: 2
     }, {
       icon: '',
-      text: '收货地址管理'
+      text: '收货地址管理',
+      url:'../select-address/index',
     }, {
       icon: '',
       text: '联系客服'
