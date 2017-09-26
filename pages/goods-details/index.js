@@ -32,14 +32,12 @@ Page({
 
   //事件处理函数
   swiperchange: function(e) {
-      //console.log(e.detail.current)
-       this.setData({
-        swiperCurrent: e.detail.current
+    this.setData({
+      swiperCurrent: e.detail.current
     })
   },
   onLoad: function (e) {
     // console.log(e)
-    var that = this;
     api.getCommodity(e.id).then(res => {
       console.log(res)
       if (res.data.status === 0) {
@@ -194,7 +192,7 @@ Page({
     // console.log(dataset)
     var shopPOList = this.data.shopPOList
     var length = shopPOList.length
-    var price = 0
+    var price = this.data.goodsDetail.price
     // 点击样式
     this.data.shopPOListActive[0][dataset.attrname] = dataset.id
     this.data.shopPOListActive[1][dataset.attrname] = dataset.addprice

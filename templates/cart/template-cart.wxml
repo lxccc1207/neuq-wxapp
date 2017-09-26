@@ -1,33 +1,27 @@
-<template name="no-goods">
-    <view class="title-box">
-        购物车空空如也～
-    </view>
-    <view class="to-index-btn" bindtap="toIndexPage">
-            去逛逛
-    </view>
-</template>
-
 <template name="cart-goods-list">
     <view class="list-top">
-        <view class="label">微商城</view>
+        <view class="label">购物车</view>
         <view class="edit-btn" hidden="{{!saveHidden}}" bindtap="editTap">编辑</view>
         <view class="edit-btn" hidden="{{saveHidden}}" bindtap="saveTap">完成</view>
     </view>
     <view class="goodsList">
         <view class="a-gooods" wx:for="{{list}}"  wx:key="{{index}}" >
-            <view class="a-goods-conts {{item.active? 'active':''}}" bindtap="selectTap" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}"    style="{{item.left}}">
+            <view class="a-goods-conts {{item.active? 'active':''}}" bindtap="selectTap" bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" data-index="{{index}}" style="{{item.left}}">
                 <view class="goods-info">
                     <view class="img-box">
-                        <image src="{{item.pic}}" class="img"/>
+                        <image src="{{item.commodityPO.imageList[0].url}}" class="img"/>
                     </view>
                     <view class="text-box">
-                        <view class="goods-title">{{item.name}}</view>
-                        <view class="goods-label">{{item.label}}</view>
-                        <view class="goods-price">¥ {{item.price}}</view>
+                        <view class="goods-title">{{item.commodityPO.name}}</view>
+                        <view class="goods-detail" hover-class="none" catchtap="jumpDetail" data-id="{{item.commodityPO.id}}">商品详情</view>
+                        <view class="goods-label">
+                            <block wx:for="{{item.commodityPO.commodityAttrPOList}}" wx:for-item="itemChild" wx:key="{{itemChild.id}}">{{itemChild.typeName}}:{{itemChild.value}} </block>
+                        </view>
+                        <view class="goods-price">¥ {{item.commodityPO.price}}</view>
                         <view class="buy-num">
-                            <view class="jian-btn {{item.number==1? 'disabled' : ''}}" catchtap="jianBtnTap" data-index="{{index}}">-</view>
+                            <view class="subtract-btn {{item.number==1? 'disabled' : ''}}" catchtap="subtractBtnTap" data-index="{{index}}">-</view>
                             <input  type="number" value="{{item.number}}" disabled/>
-                            <view class="jia-btn {{item.number==10? 'disabled' : ''}}" catchtap="jiaBtnTap" data-index="{{index}}">+</view>
+                            <view class="add-btn {{item.number==10? 'disabled' : ''}}" catchtap="addBtnTap" data-index="{{index}}">+</view>
                         </view>
                     </view>
                 </view>
@@ -37,12 +31,21 @@
             </view>
         </view>
     </view>
-    <view class="jiesuan-box">
+    <view class="settlement-box">
         <view class="left-price">
             <view class="all-selected  {{allSelect?'active':''}}" bindtap="bindAllSelect">全选</view>
             <view class="total" hidden="{{noSelect}}">合计：¥ {{totalPrice}}</view>
         </view>
         <view class="to-pay-btn {{noSelect?'no-select':''}}" hidden="{{!saveHidden}}" bindtap="toPayOrder">去结算</view>
         <view class="to-pay-btn {{noSelect?'no-select':''}}" hidden="{{saveHidden}}" bindtap="deleteSelected">删除</view>
+    </view>
+</template>
+
+<template name="no-goods">
+    <view class="title-box">
+        购物车空空如也～
+    </view>
+    <view class="to-index-btn" bindtap="toIndexPage">
+        去逛逛
     </view>
 </template>

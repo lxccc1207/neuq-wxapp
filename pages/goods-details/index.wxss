@@ -230,10 +230,11 @@ swiper-item image {
   width: 36rpx;
   height: 36rpx;
   flex: 1;
-  /*background:url("") no-repeat center center;*/
+  background:url("https://cdn.it120.cc/images/weappshop/popup-close.png") no-repeat right center;
   background-size: 36rpx auto;
   align-self: flex-start;
   margin-top: -10rpx;
+  margin-right:20rpx;
 }
 .size-label-box  .label{
   font-size:26rpx;

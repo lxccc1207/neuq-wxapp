@@ -36,9 +36,18 @@ function getCommodity (id) {
   })
 }
 
+function getShoppingCart () {
+  var uid = wx.getStorageSync('UID')
+  return pwx.request({
+    url: apiConfig.baseUrl + apiConfig.type + apiConfig.version + '/commodity/getShoppingCartByUserId/' + uid,
+    method : "GET"
+  })
+}
+
 module.exports = {
   getSession: getSession,
   decodeUserInfo: decodeUserInfo,
   getIndexInfo: getIndexInfo,
-  getCommodity: getCommodity
+  getCommodity: getCommodity,
+  getShoppingCart: getShoppingCart
 }
