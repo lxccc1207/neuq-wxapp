@@ -1,3 +1,4 @@
+const api = require('../../api/index.js')
 Page({
     data: {
         category: [
@@ -13,18 +14,12 @@ Page({
         isScroll: false,
         toView: 'cafe'
     },
-    onReady(){
-        var self = this;
-        // wx.request({
-        //     url:'',
-        //     success(res){
-        //         console.log(res.data)
-        //         self.setData({
-        //             detail : res.data.result
-        //         })
-        //     }
-        // });
-        
+    onLoad: function () {
+        api.getTypeList().then(res => {
+            if (res.data.status === 0) {
+                console.log(res)
+            }
+        })
     },
     switchTab(e){
         this.setData({
