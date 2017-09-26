@@ -37,17 +37,33 @@ function getCommodity (id) {
 }
 
 function getShoppingCart () {
-  var uid = wx.getStorageSync('UID')
   return pwx.request({
-    url: apiConfig.baseUrl + apiConfig.type + apiConfig.version + '/commodity/getShoppingCartByUserId/' + uid,
+    url: apiConfig.baseUrl + apiConfig.type + apiConfig.version + '/commodity/getShoppingCartByUserId',
     method : "GET"
   })
 }
 
+function getTypeList () {
+  return pwx.request({
+    url: apiConfig.baseUrl + apiConfig.type + apiConfig.version + '/commodity/getTypeList',
+    method : "GET"
+  })
+}
+
+function addShoppingCart (data) {
+  return pwx.request({
+    url: apiConfig.baseUrl + apiConfig.type + apiConfig.version + '/commodity/addShoppingCart',
+    method : "POST",
+    data: data
+  })
+}
+
 module.exports = {
-  getSession: getSession,
-  decodeUserInfo: decodeUserInfo,
-  getIndexInfo: getIndexInfo,
-  getCommodity: getCommodity,
-  getShoppingCart: getShoppingCart
+  getSession,
+  decodeUserInfo,
+  getIndexInfo,
+  getCommodity,
+  getShoppingCart,
+  addShoppingCart,
+  getTypeList
 }
