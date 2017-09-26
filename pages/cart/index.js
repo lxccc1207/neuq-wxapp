@@ -1,4 +1,5 @@
 //index.js
+
 var app = getApp()
 const api = require('../../api/index.js')
 Page({
@@ -419,7 +420,7 @@ Page({
   navigateToPayOrder: function () {
     wx.hideLoading();
     wx.navigateTo({
-      url: ""
+      url: "/pages/to-pay-order/index"
     })
   }
 
