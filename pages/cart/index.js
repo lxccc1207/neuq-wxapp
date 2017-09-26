@@ -419,7 +419,7 @@ Page({
   navigateToPayOrder: function () {
     wx.hideLoading();
     wx.navigateTo({
-      url: ""
+      url: "/pages/to-pay-order/index"
     })
   }
 
