@@ -68,46 +68,17 @@ Page({
           image: '../../images/icon/error.png',
           duration: 2000
         })
+
       }
     })
-    // 获取购物车数据
-    // wx.getStorage({
-    //   key: 'shopCartInfo',
-    //   success: function(res) {
-    //     that.setData({
-    //       shopCartInfo:res.data,
-    //       shopNum:res.data.shopNum
-    //     });
-    //   }
-    // })
-    // wx.request({
-    //   url: '/'+ app.globalData.subDomain +'',
-    //   data: {
-    //     id: e.id
-    //   },
-    //   success: function(res) {
-    //     var selectSizeTemp = "";
-    //     if (res.data.data.properties) {
-    //       for(var i=0;i<res.data.data.properties.length;i++){
-    //         selectSizeTemp = selectSizeTemp + " " + res.data.data.properties[i].name;
-    //       }
-    //       that.setData({
-    //         hasMoreSelect:true,
-    //         selectSize:that.data.selectSize + selectSizeTemp,
-    //         selectSizePrice:res.data.data.basicInfo.minPrice,
-    //       });
-    //     }
-    //     that.data.goodsDetail = res.data.data;
-    //     that.setData({
-    //       goodsDetail:res.data.data,
-    //       selectSizePrice:res.data.data.basicInfo.minPrice,
-    //       buyNumMax:res.data.data.basicInfo.stores,
-    //       buyNumber:(res.data.data.basicInfo.stores>0) ? 1: 0
-    //     });
-
-    //   }
-    // })
-    // this.reputation(e.id);
+    api.getShoppingCart().then(res => {
+      if (res.data.status === 0) {
+        var length = res.data.res.length
+        this.setData({
+          shopNum: length
+        })
+      }
+    })
   },
   goShopCart: function () {
     wx.switchTab({
@@ -118,39 +89,44 @@ Page({
     this.setData({
       shopType: "addShopCart"
     })
-    this.bindGuiGeTap();
+    if (this.judgeQuantity) {
+      this.bindSpecSelectTap();
+    } else {
+      wx.showToast({
+        title: '暂时缺货哦',
+        image: '../../images/icon/error.png',
+        duration: 2000
+      })
+    }
   },
   tobuy: function () {
     this.setData({
       shopType: "tobuy"
     });
-    this.bindGuiGeTap();
-    /*    if (this.data.goodsDetail.properties && !this.data.canSubmit) {
-          this.bindGuiGeTap();
-          return;
-        }
-        if(this.data.buyNumber < 1){
-          wx.showModal({
-            title: '提示',
-            content: '暂时缺货哦~',
-            showCancel:false
-          })
-          return;
-        }
-        this.addShopCart();
-        this.goShopCart();*/
+    if (this.judgeQuantity) {
+      this.bindSpecSelectTap();
+    } else {
+      wx.showToast({
+        title: '暂时缺货哦',
+        image: '../../images/icon/error.png',
+        duration: 2000
+      })
+    }
   },
-  /**
-   * 规格选择弹出框
-   */
-  bindGuiGeTap: function() {
+  judgeQuantity: function () {
+    if (this.data.goodsDetail.quantity > 0) {
+      return true
+    } else {
+      return false
+    }
+  },
+  // 规格选择弹出框
+  bindSpecSelectTap: function() {
      this.setData({
         hideShopPopup: false
     })
   },
-  /**
-   * 规格选择弹出框隐藏
-   */
+  // 规格选择弹出框隐藏
   closePopupTap: function() {
      this.setData({
         hideShopPopup: true
@@ -294,17 +270,28 @@ Page({
       })
     } else {
       var shopCartInfo = {
-        id: this.data.goodsDetail.id,
-        number: this.data.buyNumber,
-        commodityPOList: this.data.shopPOList
+        commodityId: this.data.goodsDetail.id,
+        number: this.data.buyNumber
       }
-      console.log(JSON.stringify(shopCartInfo))
-      wx.showToast({
-        title: '加入购物车成功',
-        icon: 'success',
-        duration: 2000
+      if (this.data.shopPOList[0]) {
+        shopCartInfo.commodityAttrPOList = this.data.shopPOList[0].commodityAttrPOList
+      } else {
+        shopCartInfo.commodityAttrPOList = []
+      }
+      // console.log(JSON.stringify(shopCartInfo))
+      api.addShoppingCart(shopCartInfo).then(res => {
+        if (res.data.status === 0) {
+          wx.showToast({
+            title: '加入购物车成功',
+            icon: 'success',
+            duration: 2000
+          })
+        } else {
+          console.log(res)
+        }
+      }).finally(res => {
+        this.closePopupTap();
       })
-      this.closePopupTap();
     }
     // if (this.data.goodsDetail.properties && !this.data.canSubmit) {
     //   if (!this.data.canSubmit){
@@ -314,7 +301,7 @@ Page({
     //       showCancel: false
     //     })
     //   }
-    //   this.bindGuiGeTap();
+    //   this.bindSpecSelectTap();
     //   return;
     // }
     // if(this.data.buyNumber < 1){
@@ -360,7 +347,7 @@ Page({
           showCancel: false
         })
       }
-      this.bindGuiGeTap();
+      this.bindSpecSelectTap();
       wx.showModal({
         title: '提示',
         content: '请先选择规格尺寸哦~',
