@@ -15,7 +15,8 @@
                         <view class="goods-title">{{item.commodityPO.name}}</view>
                         <view class="goods-detail" hover-class="none" catchtap="jumpDetail" data-id="{{item.commodityPO.id}}">商品详情</view>
                         <view class="goods-label">
-                            <block wx:for="{{item.commodityPO.commodityAttrPOList}}" wx:for-item="itemChild" wx:key="{{itemChild.id}}">{{itemChild.typeName}}:{{itemChild.value}} </block>
+                            已选：
+                            <block wx:for="{{shopPOList}}" wx:for-item="itemChild" wx:key="{{itemChild.attrName}}">{{itemChild.attrName}}:{{itemChild.commodityAttrPOList[0].value}}</block>
                         </view>
                         <view class="goods-price">¥ {{item.commodityPO.price}}</view>
                         <view class="buy-num">
@@ -25,7 +26,7 @@
                         </view>
                     </view>
                 </view>
-                <view class="delete-btn" data-index="{{index}}" catchtap="delItem">
+                <view class="delete-btn" data-index="{{index}}" data-id="{{item.id}}" catchtap="delItem">
                   删除
                 </view>
             </view>
