@@ -338,7 +338,7 @@ Page({
       // 获取价格和库存
       if (!carShopBean.propertyChildIds || carShopBean.propertyChildIds == "") {
         wx.request({
-          url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/detail',
+          url: '',
           data: {
             id: carShopBean.goodsId
           },
@@ -381,7 +381,7 @@ Page({
         })
       } else {
         wx.request({
-          url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/price',
+          url: '',
           data: {
             goodsId: carShopBean.goodsId,
             propertyChildIds: carShopBean.propertyChildIds
