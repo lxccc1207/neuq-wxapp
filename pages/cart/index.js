@@ -36,7 +36,7 @@ Page({
   },
   onLoad: function () {
     api.getShoppingCart().then(res => {
-      console.log(res)
+      // console.log(res)
       if (res.data.status === 0) {
         this.data.goodsList.list = res.data.res
         this.setData({
@@ -62,6 +62,16 @@ Page({
     })
     this.initEleWidth();
     this.onShow();
+  },
+  onShow: function () {
+    api.getShoppingCart().then(res => {
+      if (res.data.status === 0) {
+        this.data.goodsList.list = res.data.res
+        this.setData({
+          goodsList: this.data.goodsList
+        })
+      }
+    })
   },
   onPullDownRefresh: function () {
     api.getShoppingCart().then(res => {
@@ -90,16 +100,12 @@ Page({
       }
     })
   },
-  // onShow: function () {
-  //   var shopList = [];
-  //   // 获取购物车数据
-  //   var shopCarInfoMem = wx.getStorageSync('shopCarInfo');
-  //   if (shopCarInfoMem && shopCarInfoMem.shopList) {
-  //     shopList = shopCarInfoMem.shopList
-  //   }
-  //   this.data.goodsList.list = shopList;
-  //   this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), shopList);
-  // },
+  jumpDetail: function (e) {
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '../goods-details/index?id=' + id
+    })
+  },
   toIndexPage: function () {
     wx.switchTab({
       url: "/pages/index/index"
@@ -152,10 +158,12 @@ Page({
     }
   },
   delItem: function (e) {
-    var index = e.currentTarget.dataset.index;
-    var list = this.data.goodsList.list;
+    var index = e.currentTarget.dataset.index
+    var id = e.currentTarget.dataset.id
+    var list = this.data.goodsList.list
     list.splice(index, 1);
     this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
+    this.deleteShoppingCart([id])
   },
   selectTap: function (e) {
     var index = e.currentTarget.dataset.index;
@@ -164,12 +172,6 @@ Page({
       list[parseInt(index)].active = !list[parseInt(index)].active;
       this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
     }
-  },
-  jumpDetail: function (e) {
-    var id = e.currentTarget.dataset.id
-    wx.navigateTo({
-      url: '../goods-details/index?id=' + id
-    })
   },
   totalPrice: function () {
     var list = this.data.goodsList.list;
@@ -211,6 +213,21 @@ Page({
       return false;
     }
   },
+  deleteShoppingCart: function (list) {
+    api.deleteShoppingCart({
+      deleteId: list
+    }).then(res => {
+      // console.log(res)
+    })
+  },
+  updateShoppingCart: function (id, number) {
+    api.updateNumber({
+      id: id,
+      number: number
+    }).then(res => {
+      // console.log(res)
+    })
+  },
   setGoodsList: function (saveHidden, total, allSelect, noSelect, list) {
     this.setData({
       goodsList: {
@@ -221,17 +238,7 @@ Page({
         list: list
       }
     });
-    var shopCarInfo = {};
-    var tempNumber = 0;
-    shopCarInfo.shopList = list;
-    for (var i = 0; i < list.length; i++) {
-      tempNumber = tempNumber + list[i].number
-    }
-    shopCarInfo.shopNum = tempNumber;
-    wx.setStorage({
-      key: "shopCarInfo",
-      data: shopCarInfo
-    })
+    // console.log(list)
   },
   bindAllSelect: function () {
     var currentAllSelect = this.data.goodsList.allSelect;
@@ -257,6 +264,7 @@ Page({
       if (list[parseInt(index)].number < 10) {
         list[parseInt(index)].number++;
         this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
+        this.updateShoppingCart(list[parseInt(index)].id, list[parseInt(index)].number)
       }
     }
   },
@@ -267,6 +275,7 @@ Page({
       if (list[parseInt(index)].number > 1) {
         list[parseInt(index)].number--;
         this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
+        this.updateShoppingCart(list[parseInt(index)].id, list[parseInt(index)].number)
       }
     }
   },
@@ -292,19 +301,19 @@ Page({
   },
   deleteSelected: function () {
     var list = this.data.goodsList.list;
-    /*
-     for(let i = 0 ; i < list.length ; i++){
-           let curItem = list[i];
-           if(curItem.active){
-             list.splice(i,1);
-           }
-     }
-     */
-    // above codes that remove elements in a for statement may change the length of list dynamically
-    list = list.filter(function (curGoods) {
+    var restList, deleteList
+    var idList = []
+    restList = list.filter(function (curGoods) {
       return !curGoods.active;
     });
-    this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), list);
+    deleteList = list.filter(function (curGoods) {
+      return curGoods.active;
+    });
+    for (var i=0;i<deleteList.length;i++) {
+      idList.push(deleteList[i].id)
+    }
+    this.setGoodsList(this.getSaveHide(), this.totalPrice(), this.allSelect(), this.noSelect(), restList);
+    this.deleteShoppingCart(idList)
   },
   toPayOrder: function () {
     wx.showLoading();

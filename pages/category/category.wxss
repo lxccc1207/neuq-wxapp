@@ -22,14 +22,14 @@ page,.main{
 }
 .categroy-right{
     float: right;
-    width: 600rpx;
+    width: 580rpx;
     height: 100%;
     overflow: hidden;
     
 }
 .cate-box{
     height: 100%;
-    padding:40rpx;
+    padding:40rpx 20rpx 0 20rpx;
     box-sizing: border-box;
 }
 .cate-box .cate-banner image{

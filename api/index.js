@@ -50,9 +50,32 @@ function getTypeList () {
   })
 }
 
+function getListCommodityByType (typeId) {
+  return pwx.request({
+    url: apiConfig.baseUrl + apiConfig.type + apiConfig.version + '/commodity/listCommodityByType/' + typeId,
+    method : "GET"
+  })
+}
+
 function addShoppingCart (data) {
   return pwx.request({
     url: apiConfig.baseUrl + apiConfig.type + apiConfig.version + '/commodity/addShoppingCart',
+    method : "POST",
+    data: data
+  })
+}
+
+function deleteShoppingCart (data) {
+  return pwx.request({
+    url: apiConfig.baseUrl + apiConfig.type + apiConfig.version + '/commodity/deleteShoppingCart',
+    method : "POST",
+    data: data
+  })
+}
+
+function updateNumber (data) {
+  return pwx.request({
+    url: apiConfig.baseUrl + apiConfig.type + apiConfig.version + '/commodity/updateNumber',
     method : "POST",
     data: data
   })
@@ -65,5 +88,8 @@ module.exports = {
   getCommodity,
   getShoppingCart,
   addShoppingCart,
-  getTypeList
+  getTypeList,
+  getListCommodityByType,
+  deleteShoppingCart,
+  updateNumber
 }

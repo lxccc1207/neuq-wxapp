@@ -175,7 +175,7 @@ Page({
     if (length) {
       for (let i=0;i<length;i++) {
         if (shopPOList[i].attrName === dataset.attrName) {
-          shopPOList[i].commodityAttrPOList[0].addPrice = dataset.attrName
+          shopPOList[i].commodityAttrPOList[0].attrName = dataset.attrName
           shopPOList[i].commodityAttrPOList[0].value = dataset.value
         }
       }
@@ -199,6 +199,7 @@ Page({
       price: price,
       shopPOList: shopPOList
     })
+    console.log(this.data.shopPOList)
     /*
     console.log(e)
     console.log(e.currentTarget.dataset.propertyid)
