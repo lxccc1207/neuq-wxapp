@@ -71,7 +71,9 @@
                     <!-- <view class="pop-goods-title">{{goodsDetail.name}}</view> -->
                     <view class="pop-goods-price">¥ {{price}}</view>
                     <view class="pop-goods-quantity">库存：{{goodsDetail.quantity}}</view>
-                    <view class="pop-goods-attr">已选：</view>
+                    <view class="pop-goods-attr">已选：
+                      <block wx:for="{{item.commodityPO.commodityAttrPOList}}" wx:for-item="itemChild" wx:key="{{itemChild.id}}">{{itemChild.typeName}}:{{itemChild.value}} </block>
+                    </view>
                 </view>
                 <view class="pop-goods-close" bindtap="closePopupTap"></view>
              </view>

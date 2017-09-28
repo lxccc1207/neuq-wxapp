@@ -6,18 +6,18 @@
     </view>
 
     <scroll-view class="categroy-right" scroll-y="{{isScroll}}" scroll-into-view="{{toView}}" scroll-with-animation="true">
-        <block wx:for="{{detail}}" wx:for-index wx:key="idx">
-            <view id="{{item.id}}" class="cate-box">
-                <view class="cate-banner">
-                    <image src="{{item.banner}}"></image>
-                </view>
-                <view class="cate-title">
-                    <text>{{item.cate}}</text>
-                </view>
+        <block>
+            <view class="cate-box">
+                <!-- <view class="cate-banner">
+                    <image src="{{item.imageList[0]}}"></image>
+                </view> -->
+                <!-- <view class="cate-title">
+                    <text>奶茶</text>
+                </view> -->
                 <view class="product">
-                    <view class="product-list" wx:for="{{item.detail}}" wx:key="index" wx:for-item="val">
-                        <navigator url="">
-                            <image src="{{val.thumb}}"></image>
+                    <view class="product-list" wx:for="{{list}}" wx:key="index" wx:for-item="val">
+                        <navigator url="../goods-details/index?id={{val.id}}">
+                            <image src="{{val.imageList[0].url}}"></image>
                             <view class="classname"><text>{{val.name}}</text></view>
                         </navigator>
                     </view>
