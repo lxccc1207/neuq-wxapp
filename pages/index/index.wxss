@@ -86,5 +86,5 @@
 }
 
 .nav-text {
-    font-size: 24rpx;
+    font-size: 30rpx;
 }

@@ -1,7 +1,7 @@
 var app = getApp()
 Page({
   data:{
-    statusType: ["待付款", "待发货", "待收货", "待评价", "已完成"],
+    statusType: [ "全部" , "待付款" , "待使用" , "待评价", "退款/售后"],
     currentType:0,
     tabClass: ["", "", "", "", ""]
   },
