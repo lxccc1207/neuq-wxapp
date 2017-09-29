@@ -81,6 +81,21 @@ function updateNumber (data) {
   })
 }
 
+function insertOrder (data) {
+  return pwx.request({
+    url: apiConfig.baseUrl + apiConfig.type + apiConfig.version + '/order/insertOrder',
+    method : "POST",
+    data: data
+  })
+}
+
+function getOrderByUserId (type) {
+  return pwx.request({
+    url: apiConfig.baseUrl + apiConfig.type + apiConfig.version + '/order/getOrderByUserId/' + type,
+    method : "GET"
+  })
+}
+
 module.exports = {
   getSession,
   decodeUserInfo,
@@ -91,5 +106,7 @@ module.exports = {
   getTypeList,
   getListCommodityByType,
   deleteShoppingCart,
-  updateNumber
+  updateNumber,
+  insertOrder,
+  getOrderByUserId
 }

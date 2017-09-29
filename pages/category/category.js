@@ -11,15 +11,19 @@ Page({
         var category, list
         api.getTypeList().then(res => {
             console.log(res)
-            category = res.data
-            api.getListCommodityByType(res.data[0].id).then(res => {
-                console.log(res)
-                list = res.data.res
-                this.setData({
-                    category: category,
-                    list: list
+            if (res.data.status === 0) {
+                category = res.data.res
+                api.getListCommodityByType(res.data.res[0].id).then(res => {
+                    console.log(res)
+                    if (res.data.status === 0) {
+                        list = res.data.res
+                        this.setData({
+                            category: category,
+                            list: list
+                        })
+                    }
                 })
-            })
+            }
         })
     },
     switchTab(e){
