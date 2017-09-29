@@ -1,17 +1,25 @@
 var app = getApp()
+const api = require('../../api/index.js')
 Page({
   data:{
     statusType: ["待付款", "待发货", "待收货", "待评价", "已完成"],
-    currentType:0,
-    tabClass: ["", "", "", "", ""]
+    currentType: 1,
+    tabClass: ["", "", "", "", ""],
+    orderList: []
   },
   statusTap:function(e){
-     var curType =  e.currentTarget.dataset.index;
+     var curType =  e.currentTarget.dataset.type;
      this.data.currentType = curType
-     this.setData({
-       currentType:curType
-     });
-     this.onShow();
+     api.getOrderByUserId(curType).then(res => {
+       console.log(res)
+       if (res.data.status === 0) {
+         this.setData({
+            currentType:curType,
+            orderList: res.data.res
+         })
+         this.onShow();
+       }
+     })
   },
   orderDetail : function (e) {
     var orderId = e.currentTarget.dataset.id;
@@ -51,12 +59,14 @@ Page({
     // wxpay.(app, money, orderId, "/pages/order-list/index");
   },
   onLoad:function(options){
-    // 生命周期函数--监听页面加载
-   
-  },
-  onReady:function(){
-    // 生命周期函数--监听页面初次渲染完成
- 
+    api.getOrderByUserId(1).then(res => {
+      console.log(res)
+      if (res.data.status === 0) {
+        this.setData({
+          orderList: res.data.res
+        })
+      }
+    })
   },
   getOrderStatistics : function () {
     var that = this;
@@ -103,11 +113,6 @@ Page({
   onShow:function(){
     // 获取订单列表
     // wx.showLoading();
-    var that = this;
-    var postData = {
-      token: app.globalData.token
-    };
-    postData.status = that.data.currentType;
     this.getOrderStatistics();
     // wx.request({
     //   url: 'https://api.it120.cc/' + app.globalData.subDomain + '/order/list',
@@ -129,22 +134,5 @@ Page({
     //     }
     //   }
     // })
-    
-  },
-  onHide:function(){
-    // 生命周期函数--监听页面隐藏
- 
-  },
-  onUnload:function(){
-    // 生命周期函数--监听页面卸载
- 
-  },
-  onPullDownRefresh: function() {
-    // 页面相关事件处理函数--监听用户下拉动作
-   
-  },
-  onReachBottom: function() {
-    // 页面上拉触底事件的处理函数
-  
   }
 })

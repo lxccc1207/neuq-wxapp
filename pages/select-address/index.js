@@ -8,17 +8,17 @@ Page({
 
   selectTap: function (e) {
     var id = e.currentTarget.dataset.id;
-    wx.request({
-      url: '',
-      data: {
-        token:app.globalData.token,
-        id:id,
-        isDefault:'true'
-      },
-      success: (res) =>{
-        wx.navigateBack({})
-      }
-    })
+    // wx.request({
+    //   url: '',
+    //   data: {
+    //     token:app.globalData.token,
+    //     id:id,
+    //     isDefault:'true'
+    //   },
+    //   success: (res) =>{
+    //     wx.navigateBack({})
+    //   }
+    // })
   },
 
   addAddess : function () {

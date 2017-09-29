@@ -63,6 +63,7 @@ App({
           "encryptedData" :encryptedData
         })
       }).then(res => {
+        // console.log(res)
         resolve(res.data.status)
       }).catch(err => {
         reject(err)
