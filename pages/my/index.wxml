@@ -8,7 +8,7 @@
   <view class="info_list">
     <block wx:for="{{userListInfo}}" wx:key="{{item.text}}">
         <view class="weui_cell">
-            <!-- <view class="weui_cell_hd"><image src="{{item.icon}}"></image></view> -->
+            <view class="weui_cell_hd"><image src="{{item.icon}}"></image></view>
             <navigator hover-class="none" url="{{item.url}}" style="width: 100%;">
               <view class="weui_cell_bd">
                   <view class="weui_cell_bd_p"> {{item.text}} </view>

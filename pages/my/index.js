@@ -4,26 +4,26 @@ Page( {
     userInfo: {},
     projectSource: '',
     userListInfo: [ {
-      icon: '',
+      icon:'/images/icon/iconfont-order.png',
       text: '我的订单',
       url: '../order-list/index',
       isunread: true,
       unreadNum: 2
     }, {
-      icon: '',
+      icon:'/images/icon/iconfont-coupon.png',
       text: '我的代金券',
-      url:'',
+      url:'../mycoupons/index',
       isunread: false,
       unreadNum: 2
     }, {
-      icon: '',
+      icon:'/images/icon/iconfont-addr.png',
       text: '收货地址管理',
       url:'../select-address/index',
     }, {
-      icon: '',
+      icon:'/images/icon/iconfont-kefu.png',
       text: '联系客服'
     }, {
-      icon: '',
+      icon:'/images/icon/iconfont-q.png',
       text: '常见问题'
     }]
   },

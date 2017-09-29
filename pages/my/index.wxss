@@ -6,14 +6,15 @@
   display: flex;
   flex-direction: column;
   padding: 15px;
+  height:150px;
   justify-content: center;
   box-sizing: border-box;
-  align-items: center;
-  border-bottom: 1px solid #dadada;
+  align-items: center; 
+  background: url(https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2294554413,46595458&fm=27&gp=0.jpg);
 }
 .userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
+  width: 150rpx;
+  height: 150rpx;
   margin-bottom: 5px;
   border-radius: 50%;
   border: 1px solid #ddd;
@@ -33,19 +34,25 @@
 }
 .weui_cell_hd{
   display: inline-block;
-  width: 20px;
+  width: 24px;
   margin-right: 5px;
+  margin-left:0px;
+ 
 }
 .weui_cell_hd image{
   width: 100%;
   height: 20px;
-  vertical-align: -2px;
+  margin-bottom: 2px;
+  margin-right: 5px;
+  margin-left: 0px;
+  vertical-align: middle;
+  
 }
 .weui_cell_bd{
   display: inline-block;
 }
 .weui_cell_bd_p{
-  font-size: 14px;
+  font-size: 16px;
   color: #939393;
 }
 .badge{

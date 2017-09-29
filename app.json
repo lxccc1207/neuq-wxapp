@@ -8,7 +8,9 @@
     "pages/order-list/index",
     "pages/to-pay-order/index",
     "pages/address-add/index",
-    "pages/select-address/index"
+    "pages/select-address/index",
+    "pages/mycoupons/index"
+
 
   ],
   "window": {
