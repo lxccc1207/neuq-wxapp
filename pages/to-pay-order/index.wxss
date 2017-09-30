@@ -61,7 +61,7 @@ form{
 }
 .goods-list  .a-goods .img-box{
     width: 160rpx;
-    height:160rpx;
+    height:130rpx;
     overflow: hidden;
     margin-right: 20rpx;
     background-color: #d8d8d8;
@@ -89,12 +89,12 @@ form{
      line-height: 1.6;
      overflow: hidden;
  }
-.a-goods .text-box .arow01{
+/*.a-goods .text-box .arow01{
     margin-bottom: 30rpx;
-}
+}*/
 .a-goods .text-box .arow .goods-price{
-    font-size:26rpx;
-    color:#000000;
+    font-size:40rpx;
+    color:#ff0000;
     align-self: flex-start;
 }
 .a-goods .text-box .arow .goods-label{
@@ -151,7 +151,7 @@ form{
 .goods-info .row-box .right-text{
     text-align: right;
 }
-.jiesuan-box{
+.settlement-box{
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -162,7 +162,7 @@ form{
     border-top:1px solid #eee; 
     background-color: #fff;
 }
-.jiesuan-box .to-pay-btn{
+.settlement-box .to-pay-btn{
     width:250rpx;
     text-align: center;
     height: 100%;
@@ -173,7 +173,7 @@ form{
     border-radius: 0;
 }
 
-.jiesuan-box  .left-price{
+.settlement-box  .left-price{
     display: flex;
     width: 500rpx;
     justify-content:flex-end;
@@ -183,7 +183,11 @@ form{
     box-sizing: border-box;
 }
 
-.jiesuan-box .total{
+.settlement-box .total{
     color: #e64340;
     text-align: right;
+}
+
+.total-price {
+    font-size: 40rpx;
 }

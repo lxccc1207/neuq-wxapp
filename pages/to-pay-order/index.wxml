@@ -11,9 +11,9 @@
      </view>
      <view class="goods-list">
         <view class="list-title">商品列表</view>
-        <view class="a-goods" wx:for-items="{{goodsList}}" wx:key="{{index}}">
+        <view class="a-goods" wx:for="{{goodsList}}" wx:key="commodityId">
             <view class="img-box">
-                <image src="{{item.pic}}" class="img" />
+                <image src="{{item.imgUrl}}" class="img" />
             </view>
             <view class="text-box">
                 <view class="arow arow01">
@@ -21,7 +21,10 @@
                     <view class="goods-price">¥ {{item.price}}</view>
                 </view>
                 <view class="arow">
-                    <view class="goods-label">{{item.label}}</view>
+                    <view class="goods-label">
+                      {{item.shopPOList.length > 0 ? '已选: ' : ''}}
+                      <block wx:for="{{item.shopPOList}}" wx:for-item="itemChild" wx:key="attrName">{{itemChild.attrName}}:{{itemChild.commodityAttrPOList[0].value}}</block>
+                    </view>
                     <view class="goods-num">x {{item.number}}</view>
                 </view>
             </view>
@@ -29,8 +32,7 @@
      </view>
      <view class="peisong-way">
         <view class="row-box" wx:if="{{isNeedLogistics > 0}}">
-            <view class="row-label">配送方式</view>
-          
+            <view class="row-label">其他</view>
         </view>
         <view class="row-box">
             <view class="row-label">备注</view>
@@ -52,10 +54,10 @@
           </picker-view>
         </view>
      </view>
-     <view class="goods-info">
+     <!-- <view class="goods-info">
         <view class="row-box" wx:if="{{isNeedLogistics > 0 && yunPrice > 0}}">
             <view class="row-label">商品金额</view>
-            <view class="right-text">¥ {{allGoodsPrice}}</view>
+            <view class="right-text">¥ {{totalPrice}}</view>
         </view>
         <view class="row-box" wx:if="{{isNeedLogistics > 0 && yunPrice > 0}}">
             <view class="row-label">运费</view>
@@ -65,10 +67,13 @@
             <view class="row-label">优惠券</view>
             <view class="right-text">- ¥ {{youhuijine}}</view>
         </view>
-     </view>
-     <view class="jiesuan-box">
+     </view> -->
+     <view class="settlement-box">
         <view class="left-price">
-            <view class="total">合计：¥ {{allGoodsAndYunPrice - youhuijine}}</view>
+            <view class="total">
+              合计：
+              <text class="total-price">¥ {{totalPrice}}</text>
+            </view>
         </view>
         <button class="to-pay-btn" formType="submit">提交订单</button>
     </view>

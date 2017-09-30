@@ -1,6 +1,6 @@
 <view class="container">
     <view class="status-box">
-        <view bindtap="statusTap" class="status-label {{index == currentType ? 'active' : ''}}" wx:for-items="{{statusType}}" wx:key="{{index}}" data-index="{{index}}">
+        <view bindtap="statusTap" class="status-label {{index+1 == currentType ? 'active' : ''}}" wx:for-items="{{statusType}}" wx:key="{{index}}" data-type="{{index+1}}">
             {{item}}
             <view class="{{tabClass[index]}}"></view>
         </view>
@@ -10,29 +10,40 @@
         <view class="text">暂无订单</view>
     </view>
     <view class="order-list" hidden="{{orderList ? false : true}}">
-        <view class="a-order" wx:for-items="{{orderList}}" wx:key="{{index}}">
+        <view class="a-order" wx:for="{{orderList}}" wx:key="{{index}}">
             <view class="order-date">
-                <view class="date-box">下单时间：{{item.dateAdd}}</view>
+                <wxs module="dateHandle">
+                    var dateFormate = function (stamp) {
+                        var arr = getDate(stamp).toLocaleDateString().split('/')
+                        arr.splice(1,0,'年')
+                        arr.splice(3,0,'月')
+                        arr.splice(5,0,'日')
+                        var date = arr.join('')
+                        return date
+                    }
+                    module.exports.dateFormate = dateFormate;
+                </wxs>
+                <view class="date-box">下单时间：{{dateHandle.dateFormate(item.gmtCreate)}}</view>
                 <view class="status {{(item.status==-1 || item.status==4) ? '':'red'}}">{{item.statusStr}}</view>
             </view>
             <view class="goods-info" bindtap="orderDetail" data-id="{{item.id}}">
                 <view class="goods-des">
-                   <view>订单号:{{item.orderNumber}} </view>
-                   <view wx:if="{{item.remark && item.remark != ''}}">备注： {{item.remark}}</view>
+                   <view>订单号:{{item.id}} </view>
+                   <!-- <view>备注： {{item.message ? item.message : '无'}}</view> -->
                 </view>
             </view>
             <view >
                 <scroll-view class="goods-img-container" scroll-x="true">
-                    <view class="img-box" wx:for-items="{{goodsMap[item.id]}}" wx:key="{{index}}">
-                        <image src="{{item.pic}}" class="goods-img"></image>
+                    <view class="img-box" wx:for="{{item.orderCommodityPOList}}" wx:for-item="itemChild" wx:key="{{index}}">
+                        <image src="{{itemChild.commodityPO.imageList[0].url}}" class="goods-img"></image>
                     </view>
                 </scroll-view>
             </view>
             <view class="price-box">
-                <view class="total-price">合计：¥ {{item.amountReal}}</view>
-                <view class="btn cancel-btn" hidden="{{item.status==0? fslse : true}}" bindtap="cancelOrderTap"  data-id="{{item.id}}">取消订单</view>
-                <view class="btn topay-btn" hidden="{{item.status==0? fslse : true}}" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.amountReal}}">马上付款</view>        
-            </view>  
+                <view class="total-price">合计：¥ {{item.dealPrice}}</view>
+                <view class="btn cancel-btn" hidden="{{item.status == 1 ? false : true}}" bindtap="cancelOrderTap"  data-id="{{item.id}}">取消订单</view>
+                <view class="btn topay-btn" hidden="{{item.status == 1 ? false : true}}" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.dealPrice}}">马上付款</view>
+            </view>
         </view>
 
     </view>
