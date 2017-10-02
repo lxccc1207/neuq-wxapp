@@ -96,6 +96,44 @@ function getOrderByUserId (type) {
   })
 }
 
+function addAddress (data) {
+  return pwx.request({
+    url: apiConfig.baseUrl + apiConfig.type + apiConfig.version + '/user/addAddress',
+    method : "POST",
+    data: data
+  })
+}
+
+function deleteUserAddress (id) {
+  return pwx.request({
+    url: apiConfig.baseUrl + apiConfig.type + apiConfig.version + '/user/deleteUserAddress',
+    method : "POST",
+    data: {id: id}
+  })
+}
+
+function getUserAddressList () {
+  return pwx.request({
+    url: apiConfig.baseUrl + apiConfig.type + apiConfig.version + '/user/getUserAddress',
+    method : "GET"
+  })
+}
+
+function getUserAddress (id) {
+  return pwx.request({
+    url: apiConfig.baseUrl + apiConfig.type + apiConfig.version + '/user/getUserAddress/' + id,
+    method : "GET"
+  })
+}
+
+function updateUserAddress (data) {
+  return pwx.request({
+    url: apiConfig.baseUrl + apiConfig.type + apiConfig.version + '/user/updateUserAddress',
+    method : "POST",
+    data: data
+  })
+}
+
 module.exports = {
   getSession,
   decodeUserInfo,
@@ -108,5 +146,10 @@ module.exports = {
   deleteShoppingCart,
   updateNumber,
   insertOrder,
-  getOrderByUserId
+  getOrderByUserId,
+  addAddress,
+  deleteUserAddress,
+  getUserAddress,
+  getUserAddressList,
+  updateUserAddress
 }
