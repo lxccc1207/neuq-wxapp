@@ -136,8 +136,8 @@ swiper-item image {
   font-size:20rpx;
   color:#acacb7;
   box-sizing: border-box;
-  /*background:url("") no-repeat center 21rpx;*/
-  background-size: 44rpx auto;
+  background:url(https://cdn.it120.cc/images/weappshop/icon-cart.png) no-repeat center 21rpx;
+  background-size: 60rpx auto;
 }
 .footer-box .shop-cart-btn .shop-num{
   position: absolute;

@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const api = require('../../api/index.js')
+const onfire = require('../../modules/onfire.js')
 var app = getApp()
 Page({
   data: {

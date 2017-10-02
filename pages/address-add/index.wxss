@@ -35,25 +35,31 @@ page{
     padding-right: 30rpx;
 }
 .row-wrap .right-box{
-    margin-right: 30rpx; 
+    margin-right: 30rpx;
+}
+.default-details .label {
+    width: 300rpx;
 }
 .arrow-right{
     width: 15rpx;
     height: 24rpx;
 }
-.save-btn,
-.cancel-btn{
+.btn{
     width: 690rpx;
     height: 80rpx;
     line-height: 80rpx;
     text-align: center;
-    margin-top:30rpx; 
+    margin-top:30rpx;
     border-radius: 6rpx;
     box-sizing: border-box;
 }
-.save-btn{
+.btn.delete-btn{
     background-color: #e64340;
     color:#fff;
+}
+.btn.save-btn{
+    background: #1AAD19;
+    color: #fff;
 }
 button[type="default"]{
     background-color: #ffffff;
