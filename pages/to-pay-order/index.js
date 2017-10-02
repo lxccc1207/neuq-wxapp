@@ -118,7 +118,7 @@ Page({
   },
   addAddress: function () {
     wx.navigateTo({
-      url:"/pages/address-add/index"
+      url:"/pages/address-add/index?firstAdd=true"
     })
   },
   selectAddress: function () {

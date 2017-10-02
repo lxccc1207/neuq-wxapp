@@ -6,7 +6,8 @@ const onfire = require('../../modules/onfire.js')
 Page({
   data: {
     addressList:[],
-    status: 0
+    status: 0,
+    firstAdd: false
   },
   onPullDownRefresh: function () {
     api.getUserAddressList().then(res => {
@@ -26,6 +27,12 @@ Page({
       wx.navigateBack({})
       onfire.fire('changeAddress', id)
     }
+    if (this.data.firstAdd) {
+      wx.navigateBack({
+        delta: 2
+      })
+      onfire.fire('changeAddress', id)
+    }
   },
   addAddess : function () {
     wx.navigateTo({
@@ -41,6 +48,11 @@ Page({
     if (parseInt(e.status) === 1) {
       this.setData({
         status: 1
+      })
+    }
+    if (e.firstAdd) {
+      this.setData({
+        firstAdd: true
       })
     }
   },
