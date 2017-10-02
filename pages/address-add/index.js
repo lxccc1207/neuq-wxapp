@@ -7,6 +7,7 @@ Page({
     addressData: {},
     id: 0,
     status: 0, // 0 -> add , 1 -> update
+    firstAdd: false
   },
   bindCancel: function () {
     wx.navigateBack({})
@@ -55,7 +56,13 @@ Page({
             icon: 'success',
             duration: 2000
           })
-          wx.navigateBack({})
+          if (this.data.firstAdd) {
+            wx.navigateTo({
+              url: '/pages/select-address/index?firstAdd=true'
+            })
+          } else {
+            wx.navigateBack({})
+          }
           this.setData({
             addressData: {}
           })
@@ -85,6 +92,7 @@ Page({
   },
   onLoad: function (e) {
     var id = e.id;
+    var firstAdd = e.firstAdd
     if (id) {
       // 初始化原数据
       wx.showLoading();
@@ -98,6 +106,11 @@ Page({
             addressData: res.data.res
           })
         }
+      })
+    }
+    if (e.firstAdd) {
+      this.setData({
+        firstAdd: true
       })
     }
   },
