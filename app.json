@@ -9,9 +9,8 @@
     "pages/to-pay-order/index",
     "pages/address-add/index",
     "pages/select-address/index",
-    "pages/mycoupons/index"
-
-
+    "pages/mycoupons/index",
+    "pages/classify/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

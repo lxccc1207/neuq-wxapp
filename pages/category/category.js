@@ -22,7 +22,7 @@ Page({
         })
     },
     switchTab(e){
-        var id = e.currentTarget.dataset.id
+        var id = e.currentTarget.dataset.id;
         this.setData({
             toView : e.target.dataset.id,
             curIndex : e.target.dataset.index
