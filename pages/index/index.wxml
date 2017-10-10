@@ -19,7 +19,9 @@
   <view class="index-nav">
     <block wx:for="{{classifyList}}" wx:key="{{item.id}}">
       <view class="nav-item">
+       <navigator url="../classify/index?id={{item.id}}" >
         <image src="{{item.url}}" class="nav-icon" mode="widthFix"/>
+        </navigator>
         <text class="nav-text">{{item.name}}</text>
       </view>
     </block>
